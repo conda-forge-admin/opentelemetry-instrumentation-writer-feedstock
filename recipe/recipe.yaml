@@ -30,13 +30,14 @@ requirements:
     - opentelemetry-semantic-conventions-ai >=0.5.1,<0.6.0
 
 tests:
-  - python:
-      imports:
-        - opentelemetry.instrumentation.writer
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - "*"
+  - requirements:
+      run:
+        - python ${{ python_min }}.*
+        - pip
+        - writer-sdk
+    script:
+      - python -c "import opentelemetry.instrumentation.writer"
+      - python -m pip check
 
 about:
   summary: OpenTelemetry Writer instrumentation
